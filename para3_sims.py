@@ -13,6 +13,13 @@ job_list = {
     "c++ developer": {"salary": 50, "gladness_less": 10},
     "rust developer": {"salary": 50, "gladness_less": 10}
 }
+
+class Vacation:
+    def __init__(self):
+        self.cost = random.randint(100, 250)
+        self.gladness_boost = random.randint(20, 40)
+
+
 class Friend:
     def __init__(self, name="alex"):
         self.name = name
@@ -34,7 +41,7 @@ class Pet:
 class Human:
     def __init__(self, name="human", job=None, home=None, car=None, pet=None, friend=None):
         self.name = name
-        self.money = 100
+        self.money = 200
         self.gladness = 50
         self.satiety = 50
         self.job = job
@@ -115,6 +122,13 @@ class Human:
         self.gladness += 10
         self.home.mess += 5
 
+    def go_on_vacation(self):
+        vacation = Vacation()
+        self.money -= vacation.cost
+        self.gladness += vacation.gladness_boost
+        self.satiety -= 10
+        print(f"I went on vacation! Spent {vacation.cost} money, but got {vacation.gladness_boost} gladness.")
+
     def clean_home(self):
         self.gladness -= 5
         self.home.mess = 0
@@ -181,7 +195,7 @@ class Human:
 
         self.days_indexes(day)
 
-        dice = random.randint(1, 6)  # Додано ще один варіант для друга
+        dice = random.randint(1, 7)
         if self.satiety < 20:
             print("I'll go eat")
             self.eat()
@@ -212,6 +226,9 @@ class Human:
         elif dice == 6:
             print("Hanging out with friend!")
             self.invite_friend()
+        elif dice == 7:
+            print("Time for a vacation!")
+            self.go_on_vacation()
 
 class Auto:
     def __init__(self, brand_list):
